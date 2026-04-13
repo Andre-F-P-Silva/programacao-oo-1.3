@@ -64,12 +64,10 @@ class Carrinho {
         _itens = ListaCarrinho(),
         _aberto = true;
 
-  // Getters
   Cliente get cliente => _cliente;
   ListaCarrinho get itens => _itens;
   bool get aberto => _aberto;
 
-  // Setters
   set cliente(Cliente valor) {
     _cliente = valor;
   }
@@ -78,7 +76,6 @@ class Carrinho {
     _aberto = valor;
   }
 
-  // Métodos
   void adicionarItem(ItemCarrinho item) {
     if (_aberto) {
       _itens.inserir(item);
@@ -116,22 +113,18 @@ class Carrinho {
 }
 
 void main() {
-  // Criando cliente
-  Cliente cliente = Cliente("Ana Silva", "ana@email.com");
 
-  // Criando produtos
+  Cliente cliente = Cliente("André Felipe", "andref@gmail.com");
+
   Produto p1 = Produto("Camiseta", 49.90);
-  Produto p2 = Produto("Calça Jeans", 129.90);
+  Produto p2 = Produto("Jaqueta", 199.90);
 
-  // Criando itens
   ItemCarrinho item1 = ItemCarrinho(p1, 2);
   ItemCarrinho item2 = ItemCarrinho(p2, 1);
 
-  // Montando carrinho
   Carrinho carrinho = Carrinho(cliente);
   carrinho.adicionarItem(item1);
   carrinho.adicionarItem(item2);
 
-  // Exibindo carrinho e total
   carrinho.exibirCarrinho();
 }
