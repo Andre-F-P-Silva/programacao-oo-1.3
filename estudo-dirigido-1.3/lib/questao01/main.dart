@@ -11,13 +11,11 @@ class Cliente {
     _ativo = ativo;
   }
 
-  // Getters
   String get nome => _nome;
   String get email => _email;
   double get saldoCarteira => _saldoCarteira;
   bool get ativo => _ativo;
 
-  // Setters
   set nome(String valor) {
     if (valor.isNotEmpty) {
       _nome = valor;
@@ -46,7 +44,6 @@ class Cliente {
     _ativo = valor;
   }
 
-  // Métodos
   void ativar() {
     _ativo = true;
     print("Cliente $_nome ativado.");
@@ -85,21 +82,17 @@ class Cliente {
 }
 
 void main() {
-  // Criando dois clientes
-  Cliente c1 = Cliente("Ana Silva", "ana@email.com", 100.0, true);
-  Cliente c2 = Cliente("Bruno Lima", "bruno@email.com", 200.0, true);
 
-  // Alterando dados com setters
-  c1.nome = "Ana Costa";
-  c2.email = "brunolima@email.com";
+  Cliente c1 = Cliente("André Felipe", "andref@gmail.com", 100.0, true);
+  Cliente c2 = Cliente("Rayane Nepomuceno", "rayanen@gmail.com", 200.0, true);
 
-  // Adicionando saldo no c1
+  c1.nome = "André Felipe";
+  c2.email = "rayanenepomuceno@gmail.com";
+
   c1.adicionarSaldo(50.0);
 
-  // Debitando saldo do c2
   c2.debitarSaldo(80.0);
 
-  // Exibindo dados finais
   c1.exibirCliente();
   c2.exibirCliente();
 }
