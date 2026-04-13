@@ -61,29 +61,24 @@ class ListaProduto {
 }
 
 void main() {
-  // Criando produtos
-  Produto p1 = Produto("Camiseta", 49.90, 10, true);
-  Produto p2 = Produto("Calça Jeans", 129.90, 5, true);
-  Produto p3 = Produto("Tênis", 199.90, 8, true);
 
-  // Inserindo na lista
+  Produto p1 = Produto("Camiseta", 49.90, 10, true);
+  Produto p2 = Produto("Jaqueta", 199.90, 5, true);
+  Produto p3 = Produto("Cachecol", 89.90, 8, true);
+
   ListaProduto lista = ListaProduto();
   lista.inserir(p1);
   lista.inserir(p2);
   lista.inserir(p3);
 
-  // Mostrando tamanho
   print("Tamanho da lista: ${lista.tamanho()}");
 
-  // Recuperando produto pelo índice
   Produto? produtoRecuperado = lista.get(2);
   if (produtoRecuperado != null) {
     print("Produto recuperado: ${produtoRecuperado.nome}");
   }
 
-  // Removendo um produto
   lista.remover(1);
 
-  // Exibindo lista final
   lista.exibirLista();
 }
