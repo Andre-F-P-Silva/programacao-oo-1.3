@@ -91,7 +91,6 @@ class Pedido {
         _carrinho = carrinho,
         _cupom = cupom;
 
-  // Getters
   String get numero => _numero;
   Carrinho get carrinho => _carrinho;
   CupomDesconto? get cupom => _cupom;
@@ -99,7 +98,6 @@ class Pedido {
   double get totalFinal => _totalFinal;
   String get status => _status;
 
-  // Setters
   set numero(String valor) {
     if (valor.isNotEmpty) {
       _numero = valor;
@@ -121,7 +119,6 @@ class Pedido {
     }
   }
 
-  // Métodos
   void fecharPedido() {
     if (_status == "aberto") {
       _totalBruto = _carrinho.calcularTotal();
@@ -166,28 +163,23 @@ class Pedido {
 }
 
 void main() {
-  // Criando cliente
-  Cliente cliente = Cliente("Ana Silva");
 
-  // Criando produtos e itens
+  Cliente cliente = Cliente("André Felipe");
+
   Produto p1 = Produto("Camiseta", 49.90);
-  Produto p2 = Produto("Calça Jeans", 129.90);
+  Produto p2 = Produto("Jaqueta", 199.90);
 
   ItemCarrinho item1 = ItemCarrinho(p1, 2);
   ItemCarrinho item2 = ItemCarrinho(p2, 1);
 
-  // Montando carrinho
   Carrinho carrinho = Carrinho(cliente);
   carrinho.adicionarItem(item1);
   carrinho.adicionarItem(item2);
 
-  // Criando cupom
-  CupomDesconto cupom = CupomDesconto("DESCONTO10", 10, true);
+  CupomDesconto cupom = CupomDesconto("DESCONTO20", 20, true);
 
-  // Criando e fechando pedido
   Pedido pedido = Pedido("PED-001", carrinho, cupom: cupom);
   pedido.fecharPedido();
 
-  // Exibindo resumo
   pedido.exibirResumoPedido();
 }
