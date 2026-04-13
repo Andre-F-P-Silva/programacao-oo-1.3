@@ -1,182 +1,65 @@
 class Cliente {
-  String _nome = "";
-  String _email = "";
-  double _saldoCarteira = 0;
-  bool _ativo = false;
-
-  Cliente(String nome, String email, double saldoCarteira, bool ativo) {
-    _nome = nome;
-    _email = email;
-    _saldoCarteira = saldoCarteira;
-    _ativo = ativo;
-  }
-
-  String get nome => _nome;
-  String get email => _email;
-  double get saldoCarteira => _saldoCarteira;
-  bool get ativo => _ativo;
-
-  void exibirCliente() {
-    print("  Cliente: $_nome | Email: $_email | Saldo: R\$ $_saldoCarteira | Ativo: $_ativo");
-  }
+  String nome = "";
+  String email = "";
+  Cliente(this.nome, this.email);
+  void exibirCliente() => print("  Cliente: $nome | $email");
 }
 
 class Produto {
-  String _nome = "";
-  double _preco = 0;
-  int _estoque = 0;
-  bool _ativo = false;
-
-  Produto(String nome, double preco, int estoque, bool ativo) {
-    _nome = nome;
-    _preco = preco;
-    _estoque = estoque;
-    _ativo = ativo;
-  }
-
-  String get nome => _nome;
-  double get preco => _preco;
-  int get estoque => _estoque;
-  bool get ativo => _ativo;
-
-  void exibirProduto() {
-    print("  Produto: $_nome | Preço: R\$ $_preco | Estoque: $_estoque | Ativo: $_ativo");
-  }
+  String nome = "";
+  double preco = 0;
+  int estoque = 0;
+  Produto(this.nome, this.preco, this.estoque);
+  void exibirProduto() => print("  Produto: $nome | R\$ $preco | Estoque: $estoque");
 }
 
 class ItemCarrinho {
-  Produto _produto;
-  int _quantidade;
-
-  ItemCarrinho(Produto produto, int quantidade)
-      : _produto = produto,
-        _quantidade = quantidade > 0 ? quantidade : 1;
-
-  Produto get produto => _produto;
-  int get quantidade => _quantidade;
-
-  double calcularSubtotal() => _produto.preco * _quantidade;
-
-  void exibirItem() {
-    print("    - ${_produto.nome} x $_quantidade = R\$ ${calcularSubtotal()}");
-  }
-}
-
-class ListaCarrinho {
-  List<ItemCarrinho> _itens = [];
-  void inserir(ItemCarrinho item) => _itens.add(item);
-  List<ItemCarrinho> get todos => _itens;
+  Produto produto;
+  int quantidade;
+  ItemCarrinho(this.produto, this.quantidade);
+  double calcularSubtotal() => produto.preco * quantidade;
 }
 
 class Carrinho {
-  Cliente _cliente;
-  ListaCarrinho _itens;
-  bool _aberto;
-
-  Carrinho(Cliente cliente)
-      : _cliente = cliente,
-        _itens = ListaCarrinho(),
-        _aberto = true;
-
-  Cliente get cliente => _cliente;
-  ListaCarrinho get itens => _itens;
-  bool get aberto => _aberto;
-
-  void adicionarItem(ItemCarrinho item) => _itens.inserir(item);
-
+  Cliente cliente;
+  List<ItemCarrinho> itens = [];
+  Carrinho(this.cliente);
+  void adicionarItem(ItemCarrinho item) => itens.add(item);
   double calcularTotal() {
     double total = 0;
-    for (ItemCarrinho item in _itens.todos) {
-      total += item.calcularSubtotal();
-    }
+    for (ItemCarrinho item in itens) total += item.calcularSubtotal();
     return total;
   }
 }
 
-class CupomDesconto {
-  String _codigo = "";
-  double _percentual = 0;
-  bool _ativo = false;
-
-  CupomDesconto(String codigo, double percentual, bool ativo) {
-    _codigo = codigo;
-    _percentual = percentual;
-    _ativo = ativo;
-  }
-
-  String get codigo => _codigo;
-  double get percentual => _percentual;
-  bool get ativo => _ativo;
-
-  double calcularDesconto(double valor) {
-    if (_ativo) return valor * (_percentual / 100);
-    return 0;
-  }
-}
-
 class Pedido {
-  String _numero = "";
-  Carrinho _carrinho;
-  CupomDesconto? _cupom;
-  double _totalBruto = 0;
-  double _totalFinal = 0;
-  String _status = "aberto";
-
-  Pedido(String numero, Carrinho carrinho, {CupomDesconto? cupom})
-      : _numero = numero,
-        _carrinho = carrinho,
-        _cupom = cupom;
-
-  String get numero => _numero;
-  Carrinho get carrinho => _carrinho;
-  double get totalFinal => _totalFinal;
-  String get status => _status;
-
+  String numero;
+  Carrinho carrinho;
+  double totalFinal = 0;
+  String status = "aberto";
+  Pedido(this.numero, this.carrinho);
   void fecharPedido() {
-    _totalBruto = _carrinho.calcularTotal();
-    if (_cupom != null && _cupom!.ativo) {
-      _totalFinal = _totalBruto - _cupom!.calcularDesconto(_totalBruto);
-    } else {
-      _totalFinal = _totalBruto;
-    }
-    _status = "fechado";
+    totalFinal = carrinho.calcularTotal();
+    status = "fechado";
   }
-
   void exibirResumoPedido() {
-    print("  Pedido: $_numero | Status: $_status | Total: R\$ $_totalFinal");
-    for (ItemCarrinho item in _carrinho.itens.todos) {
-      item.exibirItem();
-    }
+    print("  Pedido: $numero | Status: $status | Total: R\$ $totalFinal");
   }
-}
-
-class ListaCliente {
-  List<Cliente> _clientes = [];
-  void inserir(Cliente c) => _clientes.add(c);
-  List<Cliente> get todos => _clientes;
-}
-
-class ListaProduto {
-  List<Produto> _produtos = [];
-  void inserir(Produto p) => _produtos.add(p);
-  List<Produto> get todos => _produtos;
 }
 
 class Loja {
   String _nome = "";
-  ListaCliente _clientes;
-  ListaProduto _produtos;
-  List<Pedido> _pedidos;
+  List<Cliente> _clientes = [];
+  List<Produto> _produtos = [];
+  List<Pedido> _pedidos = [];
 
-  Loja(String nome)
-      : _nome = nome,
-        _clientes = ListaCliente(),
-        _produtos = ListaProduto(),
-        _pedidos = [];
+  Loja(String nome) {
+    _nome = nome;
+  }
 
   String get nome => _nome;
-  ListaCliente get clientes => _clientes;
-  ListaProduto get produtos => _produtos;
+  List<Cliente> get clientes => _clientes;
+  List<Produto> get produtos => _produtos;
   List<Pedido> get pedidos => _pedidos;
 
   set nome(String valor) {
@@ -188,53 +71,42 @@ class Loja {
   }
 
   void cadastrarCliente(Cliente cliente) {
-    _clientes.inserir(cliente);
-    print("Cliente ${cliente.nome} cadastrado na loja.");
+    _clientes.add(cliente);
+    print("Cliente ${cliente.nome} cadastrado.");
   }
 
   void cadastrarProduto(Produto produto) {
-    _produtos.inserir(produto);
-    print("Produto ${produto.nome} cadastrado na loja.");
+    _produtos.add(produto);
+    print("Produto ${produto.nome} cadastrado.");
   }
 
   void registrarPedido(Pedido pedido) {
     _pedidos.add(pedido);
-    print("Pedido ${pedido.numero} registrado na loja.");
+    print("Pedido ${pedido.numero} registrado.");
   }
 
   void exibirResumoLoja() {
-    print("=============================");
-    print("Loja: Furacão Store");
-    print("=============================");
+    print("=== Loja: Furacão Store ===");
 
-    print("\nClientes (${_clientes.todos.length}):");
-    for (Cliente c in _clientes.todos) {
-      c.exibirCliente();
-    }
+    print("\nClientes (${_clientes.length}):");
+    for (Cliente c in _clientes) c.exibirCliente();
 
-    print("\nProdutos (${_produtos.todos.length}):");
-    for (Produto p in _produtos.todos) {
-      p.exibirProduto();
-    }
+    print("\nProdutos (${_produtos.length}):");
+    for (Produto p in _produtos) p.exibirProduto();
 
     print("\nPedidos (${_pedidos.length}):");
-    for (Pedido p in _pedidos) {
-      p.exibirResumoPedido();
-    }
-
-    print("=============================");
+    for (Pedido p in _pedidos) p.exibirResumoPedido();
   }
 }
 
 void main() {
- 
   Loja loja = Loja("Furacão Store");
 
-  Cliente c1 = Cliente("André Felipe", "andref@gmail.com", 500.0, true);
-  Cliente c2 = Cliente("Rayane Nepomuceno", "rayanen@gmail.com", 300.0, true);
+  Cliente c1 = Cliente("André Felipe", "andref@gmail.com");
+  Cliente c2 = Cliente("Rayane Nepomuceno", "rayanen@gmail.com");
 
-  Produto p1 = Produto("Camiseta", 49.90, 50, true);
-  Produto p2 = Produto("Jaqueta", 199.90, 20, true);
+  Produto p1 = Produto("Camiseta", 49.90, 50);
+  Produto p2 = Produto("Jaqueta", 199.90, 20);
 
   loja.cadastrarCliente(c1);
   loja.cadastrarCliente(c2);
@@ -245,10 +117,8 @@ void main() {
   carrinho.adicionarItem(ItemCarrinho(p1, 2));
   carrinho.adicionarItem(ItemCarrinho(p2, 1));
 
-  CupomDesconto cupom = CupomDesconto("LOJA15", 15, true);
-  Pedido pedido = Pedido("PED-001", carrinho, cupom: cupom);
+  Pedido pedido = Pedido("PED-001", carrinho);
   pedido.fecharPedido();
-
   loja.registrarPedido(pedido);
 
   loja.exibirResumoLoja();
