@@ -25,11 +25,9 @@ class ItemCarrinho {
       : _produto = produto,
         _quantidade = quantidade > 0 ? quantidade : 1;
 
-  // Getters
   Produto get produto => _produto;
   int get quantidade => _quantidade;
 
-  // Setters
   set produto(Produto valor) {
     _produto = valor;
   }
@@ -42,7 +40,6 @@ class ItemCarrinho {
     }
   }
 
-  // Métodos
   double calcularSubtotal() {
     return _produto.preco * _quantidade;
   }
@@ -57,18 +54,15 @@ class ItemCarrinho {
 }
 
 void main() {
-  // Criando produtos
-  Produto p1 = Produto("Camiseta", 49.90, 10, true);
-  Produto p2 = Produto("Calça Jeans", 129.90, 5, true);
 
-  // Criando itens de carrinho
+  Produto p1 = Produto("Camiseta", 49.90, 10, true);
+  Produto p2 = Produto("Jaqueta", 199.90, 5, true);
+
   ItemCarrinho item1 = ItemCarrinho(p1, 2);
   ItemCarrinho item2 = ItemCarrinho(p2, 1);
 
-  // Alterando quantidade com setter
   item1.quantidade = 3;
 
-  // Exibindo itens e subtotais
   item1.exibirItem();
   item2.exibirItem();
 }
