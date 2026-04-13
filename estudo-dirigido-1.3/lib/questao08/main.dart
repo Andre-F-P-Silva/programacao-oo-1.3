@@ -9,12 +9,10 @@ class CupomDesconto {
     _ativo = ativo;
   }
 
-  // Getters
   String get codigo => _codigo;
   double get percentual => _percentual;
   bool get ativo => _ativo;
 
-  // Setters
   set codigo(String valor) {
     if (valor.isNotEmpty) {
       _codigo = valor;
@@ -35,7 +33,6 @@ class CupomDesconto {
     _ativo = valor;
   }
 
-  // Métodos
   void ativar() {
     _ativo = true;
     print("Cupom $_codigo ativado.");
@@ -64,20 +61,17 @@ class CupomDesconto {
 }
 
 void main() {
-  // Criando cupom
+ 
   CupomDesconto cupom = CupomDesconto("PROMO10", 10, true);
 
-  // Alterando dados com setter
-  cupom.percentual = 15;
-  cupom.codigo = "PROMO15";
+  cupom.percentual = 20;
+  cupom.codigo = "PROMO20";
 
-  // Testando cálculo do desconto
   double valor = 200.0;
   double desconto = cupom.calcularDesconto(valor);
   print("Valor original: R\$ $valor");
   print("Desconto: R\$ $desconto");
   print("Valor final: R\$ ${valor - desconto}");
 
-  // Exibindo dados finais
   cupom.exibirCupom();
 }
