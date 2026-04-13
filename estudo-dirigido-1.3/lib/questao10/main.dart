@@ -174,13 +174,11 @@ class Loja {
         _produtos = ListaProduto(),
         _pedidos = [];
 
-  // Getters
   String get nome => _nome;
   ListaCliente get clientes => _clientes;
   ListaProduto get produtos => _produtos;
   List<Pedido> get pedidos => _pedidos;
 
-  // Setter
   set nome(String valor) {
     if (valor.isNotEmpty) {
       _nome = valor;
@@ -189,7 +187,6 @@ class Loja {
     }
   }
 
-  // Métodos
   void cadastrarCliente(Cliente cliente) {
     _clientes.inserir(cliente);
     print("Cliente ${cliente.nome} cadastrado na loja.");
@@ -207,7 +204,7 @@ class Loja {
 
   void exibirResumoLoja() {
     print("=============================");
-    print("Loja: $_nome");
+    print("Loja: Furacão Store");
     print("=============================");
 
     print("\nClientes (${_clientes.todos.length}):");
@@ -230,35 +227,29 @@ class Loja {
 }
 
 void main() {
-  // Criando a loja
-  Loja loja = Loja("Minha Loja");
+ 
+  Loja loja = Loja("Furacão Store");
 
-  // Criando clientes
-  Cliente c1 = Cliente("Ana Silva", "ana@email.com", 500.0, true);
-  Cliente c2 = Cliente("Bruno Lima", "bruno@email.com", 300.0, true);
+  Cliente c1 = Cliente("André Felipe", "andref@gmail.com", 500.0, true);
+  Cliente c2 = Cliente("Rayane Nepomuceno", "rayanen@gmail.com", 300.0, true);
 
-  // Criando produtos
   Produto p1 = Produto("Camiseta", 49.90, 50, true);
-  Produto p2 = Produto("Calça Jeans", 129.90, 20, true);
+  Produto p2 = Produto("Jaqueta", 199.90, 20, true);
 
-  // Cadastrando na loja
   loja.cadastrarCliente(c1);
   loja.cadastrarCliente(c2);
   loja.cadastrarProduto(p1);
   loja.cadastrarProduto(p2);
 
-  // Criando um pedido
   Carrinho carrinho = Carrinho(c1);
   carrinho.adicionarItem(ItemCarrinho(p1, 2));
   carrinho.adicionarItem(ItemCarrinho(p2, 1));
 
-  CupomDesconto cupom = CupomDesconto("LOJA10", 10, true);
+  CupomDesconto cupom = CupomDesconto("LOJA15", 15, true);
   Pedido pedido = Pedido("PED-001", carrinho, cupom: cupom);
   pedido.fecharPedido();
 
-  // Registrando pedido na loja
   loja.registrarPedido(pedido);
 
-  // Exibindo resumo geral
   loja.exibirResumoLoja();
 }
