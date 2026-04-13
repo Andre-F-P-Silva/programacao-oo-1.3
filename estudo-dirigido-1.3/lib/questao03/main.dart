@@ -11,13 +11,11 @@ class Produto {
     _ativo = ativo;
   }
 
-  // Getters
   String get nome => _nome;
   double get preco => _preco;
   int get estoque => _estoque;
   bool get ativo => _ativo;
 
-  // Setters
   set nome(String valor) {
     if (valor.isNotEmpty) {
       _nome = valor;
@@ -46,7 +44,6 @@ class Produto {
     _ativo = valor;
   }
 
-  // Métodos
   void ativar() {
     _ativo = true;
     print("Produto $_nome ativado.");
@@ -85,21 +82,17 @@ class Produto {
 }
 
 void main() {
-  // Criando dois produtos
-  Produto p1 = Produto("Camiseta", 49.90, 10, true);
-  Produto p2 = Produto("Calça Jeans", 129.90, 5, true);
 
-  // Alterando dados com setters
-  p1.nome = "Camiseta Polo";
+  Produto p1 = Produto("Camiseta Athletico", 49.90, 10, true);
+  Produto p2 = Produto("Jaqueta Athletico", 129.90, 16, true);
+
+  p1.nome = "Camiseta Athletico Torcedor";
   p2.preco = 119.90;
 
-  // Repondo estoque do p1
   p1.reporEstoque(20);
 
-  // Retirando estoque do p2
-  p2.retirarEstoque(3);
+  p2.retirarEstoque(1);
 
-  // Exibindo dados finais
   p1.exibirProduto();
   p2.exibirProduto();
 }
