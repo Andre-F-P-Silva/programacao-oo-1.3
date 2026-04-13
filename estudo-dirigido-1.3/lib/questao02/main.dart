@@ -61,29 +61,24 @@ class ListaCliente {
 }
 
 void main() {
-  // Criando clientes
-  Cliente c1 = Cliente("Ana Silva", "ana@email.com", 100.0, true);
-  Cliente c2 = Cliente("Bruno Lima", "bruno@email.com", 200.0, true);
-  Cliente c3 = Cliente("Carla Souza", "carla@email.com", 50.0, false);
 
-  // Inserindo na lista
+  Cliente c1 = Cliente("André Felipe", "andref@gmail.com", 100.0, true);
+  Cliente c2 = Cliente("Rayane Nepomuceno", "rayanen@gmail.com", 200.0, true);
+  Cliente c3 = Cliente("Marcia Cristina", "marciac@gmail.com", 50.0, false);
+
   ListaCliente lista = ListaCliente();
   lista.inserir(c1);
   lista.inserir(c2);
   lista.inserir(c3);
 
-  // Mostrando tamanho
   print("Tamanho da lista: ${lista.tamanho()}");
 
-  // Recuperando cliente pelo índice
   Cliente? clienteRecuperado = lista.get(1);
   if (clienteRecuperado != null) {
     print("Cliente recuperado: ${clienteRecuperado.nome}");
   }
 
-  // Removendo um cliente
   lista.remover(0);
 
-  // Exibindo lista final
   lista.exibirLista();
 }
