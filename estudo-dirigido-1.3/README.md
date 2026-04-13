@@ -1,13 +1,10 @@
 # Estudo Dirigido 1.3 — Encapsulamento em Dart
 
-Trabalho da disciplina de Programação Orientada a Objetos  
-Universidade Tuiuti do Paraná — 1º Bimestre
+Universidade Tuiuti do Paraná 
 
-## Integrantes
+## Integrante
 
-- Nome do Aluno 1
-- Nome do Aluno 2
-- Nome do Aluno 3
+- André Felipe Passos da Silva
 
 ## Como executar
 
