@@ -79,33 +79,28 @@ class ListaCarrinho {
 }
 
 void main() {
-  // Criando produtos e itens
+
   Produto p1 = Produto("Camiseta", 49.90);
-  Produto p2 = Produto("Calça Jeans", 129.90);
-  Produto p3 = Produto("Tênis", 199.90);
+  Produto p2 = Produto("Jaqueta", 199.90);
+  Produto p3 = Produto("Cachecol", 89.90);
 
   ItemCarrinho item1 = ItemCarrinho(p1, 2);
   ItemCarrinho item2 = ItemCarrinho(p2, 1);
   ItemCarrinho item3 = ItemCarrinho(p3, 1);
 
-  // Inserindo na lista
   ListaCarrinho lista = ListaCarrinho();
   lista.inserir(item1);
   lista.inserir(item2);
   lista.inserir(item3);
 
-  // Mostrando tamanho
   print("Tamanho da lista: ${lista.tamanho()}");
 
-  // Recuperando item pelo índice
   ItemCarrinho? itemRecuperado = lista.get(0);
   if (itemRecuperado != null) {
     print("Item recuperado: ${itemRecuperado.produto.nome}");
   }
 
-  // Removendo um item
   lista.remover(1);
 
-  // Exibindo lista final
   lista.exibirLista();
 }
